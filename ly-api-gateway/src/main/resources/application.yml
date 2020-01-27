@@ -17,6 +17,14 @@ zuul:
   retryable: true #是否开启重试
   routes:
     item-service: /item/**
+    ignored-services:
+      - upload-service  # 忽略upload-service服务
+  add-host-header: true
+  sensitive-headers:
+  #    upload-service: #/upload/**:不能这样写，网关捕获到upload之后页面的url只剩下/image，但是controller里面是/upload/image,所以不能去除upload的前缀
+  #      path: /upload/**
+  #      serviceId: upload-service
+  #      strip-prefix: false
 ribbon:
   ConnectTimeout: 250 #链接超时时间(ms)
   ReadTimeout: 2000 #通信超时时间
